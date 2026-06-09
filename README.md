@@ -28,3 +28,15 @@ go build -o esaccount ./cmd/release
 - `DB_PASSWORD` - пароль для ДБ
 
 Все остальные параметры хранятся в configs/config.yml
+
+### Конфигурация
+- Для запуска нужно прописать конфигурационный файл configs/config.yml. Пример ключевых полей:
+
+```yaml
+port: "8011"
+db:
+	host: "..."
+	port: "3306"
+	username: "..."
+	dbname: "..."
+```
