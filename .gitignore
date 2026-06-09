@@ -1,0 +1,30 @@
+# build outputs
+/build/
+/Debug/
+/release/
+bin/
+
+# Go
+/*.exe
+*.exe
+*.dll
+*.so
+*.test
+vendor/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+
+# Configs that may contain secrets
+configs/config.yml
+
+# User content
+public/usercontent/

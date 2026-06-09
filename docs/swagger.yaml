@@ -1,0 +1,329 @@
+basePath: /api
+definitions:
+  esaccount.AuthorizedUser:
+    properties:
+      access:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      google_id:
+        type: string
+      id:
+        type: integer
+      last_name:
+        type: string
+      picture_url:
+        type: string
+      telegram_id:
+        type: string
+      username:
+        type: string
+    type: object
+  handler.accountInput:
+    properties:
+      date_of_birth:
+        type: string
+      description:
+        type: string
+    type: object
+  handler.accountResponce:
+    properties:
+      date_of_birth:
+        type: string
+      description:
+        type: string
+      followers:
+        items:
+          type: integer
+        type: array
+      follows:
+        items:
+          type: integer
+        type: array
+    type: object
+host: account.easystartup.su
+info:
+  contact:
+    email: red.tea.dev@gmail.com
+    name: API Support
+  description: Account service for EasyStartup.
+  title: EasyStartup Account
+  version: "1.0"
+paths:
+  /api/account:
+    get:
+      parameters:
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.accountResponce'
+      summary: Get account information
+      tags:
+      - account
+    post:
+      parameters:
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: account info
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/handler.accountInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.accountInput'
+      summary: Set account information
+      tags:
+      - account
+  /api/account/:id:
+    get:
+      parameters:
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: account id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.accountResponce'
+      summary: Get account information by id
+      tags:
+      - account
+  /api/account/{id}:
+    delete:
+      parameters:
+      - description: id of user
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Delete account by id
+      tags:
+      - account
+    post:
+      parameters:
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: account info
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/handler.accountResponce'
+      - description: account id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.accountResponce'
+      summary: Set account information by id
+      tags:
+      - account
+  /api/account/picture:
+    post:
+      parameters:
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Picture
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Get account information
+      tags:
+      - account
+  /api/confidential/:
+    get:
+      parameters:
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Get all confidential settings
+      tags:
+      - confidential
+    post:
+      parameters:
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Confidencial settings
+        in: body
+        name: confidencial
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/esaccount.AuthorizedUser'
+      summary: Set confidential settings
+      tags:
+      - confidential
+  /api/confidential/{id}:
+    get:
+      parameters:
+      - description: id of user
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Get all confidential settings by id
+      tags:
+      - confidential
+    post:
+      parameters:
+      - description: id of user
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Confidencial settings
+        in: body
+        name: confidencial
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/esaccount.AuthorizedUser'
+      summary: Set confidential settings by id
+      tags:
+      - confidential
+  /api/following/follow/{id}:
+    put:
+      parameters:
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Follow to user
+      tags:
+      - following
+  /api/following/unfollow/{id}:
+    put:
+      parameters:
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Unfollow user
+      tags:
+      - following
+  /api/public/{id}:
+    get:
+      parameters:
+      - description: JWT Bearer token (authorization)
+        in: header
+        name: Authorization
+        type: string
+      - description: user id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Get all public data of users
+      tags:
+      - confidential
+swagger: "2.0"
