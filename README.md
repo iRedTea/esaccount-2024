@@ -25,7 +25,7 @@ go build -o esaccount ./cmd/release
 ### Переменные окружения
 
 - `ADMIN_TOKEN` - токен администратора (используется в `pkg/service/auth.go`).
-- `DB_PASSWORD` - пароль для ДБ
+- `DB_PASSWORD` - пароль для ДБ.
 
 Все остальные параметры хранятся в configs/config.yml
 
